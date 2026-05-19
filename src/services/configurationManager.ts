@@ -27,7 +27,11 @@ export class ConfigurationManager {
       return configuredDebugType;
     }
 
-    return process.platform === 'win32' ? 'cppvsdbg' : 'cppdbg';
+    if (process.platform === 'win32') {
+      return 'cppvsdbg';
+    }
+
+    return 'lldb';
   }
 
   public resolveDebugProgram(variables: TaskVariables): string {
